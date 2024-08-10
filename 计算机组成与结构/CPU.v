@@ -1,0 +1,29 @@
+module CPU(Inst,Clrn,Clk,Iaddr,Dread,Wmem,Daddr,Dwrite,Reset);
+input Clk,Clrn,Reset;
+input [31:0]Inst,Dread;
+output [31:0]Iaddr,Daddr,Dwrite;
+output Wmem;
+wire z,regrt,se,reg2reg,aluqb,wreg,cout,sub,shift,j;
+wire [1:0]pcsrc;
+wire [3:0]aluc;
+wire [4:0]wr1,wr2;
+wire [31:0]qa1,qa2,ex,pc,sh,y,d1,d2,exx,a1,pe,result;
+PC pc1(Clk,Reset,result,Iaddr);
+CLA_32add4 cla_32add4(Iaddr,pc);
+CONUNIT conunit(z,Inst[31:26],Inst[5:0],regrt,se,reg2reg,pcsrc,Wmem,aluc,aluqb,wreg,shift,j);
+
+assign wr1=regrt?Inst[20:16]:Inst[15:11];
+assign wr2=j?31:wr1;
+REGFILE regfile(Inst[25:21],Inst[20:16],d2,wr2,wreg,Clk,Clrn,qa1,Dwrite);
+assign qa2=shift?Inst:qa1;
+EXT16T32 ext16t32(Inst[15:0],se,ex);
+SHIFTER26_L2 shifter26_l2(Inst[25:0],pc[31:28],sh);
+assign y = aluqb ? Dwrite : ex;
+ALU alu(qa2,y,aluc,Daddr,z);
+SHIFTER32_L2 shifter_l2(ex,exx);
+assign sub=0;
+ADDSUB_32 addsub_32(pc,exx,sub,pe,cout);
+MUX4X32 mux4x32(pc,pe,qa1,sh,pcsrc,result);
+assign d1=reg2reg?Daddr:Dread;
+assign d2=j?pc:d1;
+endmodule
