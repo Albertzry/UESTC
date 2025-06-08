@@ -1,0 +1,59 @@
+    /* 元素选择器 */
+    
+    h1 {
+        background-color: lightblue;
+        font-family: Arial, sans-serif;
+        color: darkblue;
+        font-size: 36px;
+        text-align: center;
+    }
+    
+    h2 {
+        background-color: lightgreen;
+        font-family: 'Times New Roman', serif;
+        color: darkgreen;
+        font-size: 30px;
+        text-align: left;
+    }
+    
+    p {
+        background-color: lightyellow;
+        font-family: 'Courier New', monospace;
+        color: darkred;
+        font-size: 16px;
+        text-align: right;
+    }
+    /* id选择器 */
+    
+    #special-title {
+        background-color: pink;
+        font-family: 'Verdana', sans-serif;
+        color: purple;
+        font-size: 40px;
+        text-align: center;
+    }
+    
+    #special-paragraph {
+        background-color: lightgray;
+        font-family: 'Georgia', serif;
+        color: black;
+        font-size: 18px;
+        text-align: justify;
+    }
+    /* 类选择器 */
+    
+    .highlight {
+        background-color: yellow;
+        font-family: 'Helvetica', sans-serif;
+        color: red;
+        font-size: 20px;
+        text-align: left;
+    }
+    
+    .important {
+        background-color: orange;
+        font-family: 'Tahoma', sans-serif;
+        color: blue;
+        font-size: 22px;
+        text-align: center;
+    }
